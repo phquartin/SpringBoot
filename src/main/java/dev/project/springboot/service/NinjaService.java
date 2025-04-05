@@ -2,7 +2,9 @@ package dev.project.springboot.service;
 
 import dev.project.springboot.model.NinjaModel;
 import dev.project.springboot.repository.NinjaRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
