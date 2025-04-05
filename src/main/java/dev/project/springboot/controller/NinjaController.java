@@ -1,29 +1,30 @@
 package dev.project.springboot.controller;
 
 import dev.project.springboot.model.NinjaModel;
-import dev.project.springboot.repository.NinjaRepository;
 import dev.project.springboot.service.NinjaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/ninja")
 public class NinjaController {
 
-    private final NinjaService ninjaService;
-
-    public NinjaController(NinjaService ninjaService) {
-        this.ninjaService = ninjaService;
-    }
+    @Autowired
+    private NinjaService ninjaService;
 
     @GetMapping("/cadastro")
-    public String exibirCadastro() {
+    @ResponseBody
+    public String exibirCadastro(Model model) {
+        model.addAttribute("ninja", new NinjaModel());
         return "cadastro";
     }
 
     @PostMapping("/cadastro")
-    public String salvarNinja(@RequestParam String nome, @RequestParam String email, @RequestParam int idade) {
-        ninjaService.saveNinja(nome, email, idade);
-        return "index";
+    @ResponseBody
+    public String salvarNinja(@ModelAttribute NinjaModel ninja,  Model model) {
+        ninjaService.saveNinja(ninja);
+        return "redirect:/";
     }
 }

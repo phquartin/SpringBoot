@@ -9,17 +9,16 @@ public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    private NinjaService(NinjaRepository ninjaRepository) {
         this.ninjaRepository = ninjaRepository;
     }
 
 
-    public void saveNinja(String name, String email, int age) {
+    public void saveNinja(NinjaModel ninja) {
 
-        if(age <= 0){
+        if(ninja.getAge() <= 0){
             throw new IllegalArgumentException("Age must be greater than zero");
         }
-        NinjaModel ninja = new NinjaModel(name, email, age);
 
         ninjaRepository.save(ninja);
     }
