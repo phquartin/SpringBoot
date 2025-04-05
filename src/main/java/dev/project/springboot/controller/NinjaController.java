@@ -1,16 +1,29 @@
 package dev.project.springboot.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import dev.project.springboot.model.NinjaModel;
+import dev.project.springboot.repository.NinjaRepository;
+import dev.project.springboot.service.NinjaService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping
+@Controller
+@RequestMapping("/ninja")
 public class NinjaController {
 
-    @GetMapping("/olamundo")
-    public String olaMundo(){
-        return "Ola Mundo!";
+    private final NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
     }
 
+    @GetMapping("/cadastro")
+    public String exibirCadastro() {
+        return "cadastro";
+    }
+
+    @PostMapping("/cadastro")
+    public String salvarNinja(@RequestParam String nome, @RequestParam String email, @RequestParam int idade) {
+        ninjaService.saveNinja(nome, email, idade);
+        return "index";
+    }
 }
