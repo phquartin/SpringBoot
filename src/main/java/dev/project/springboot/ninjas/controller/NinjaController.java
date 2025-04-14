@@ -1,12 +1,11 @@
-package dev.project.springboot.controller;
+package dev.project.springboot.ninjas.controller;
 
-import dev.project.springboot.model.NinjaModel;
-import dev.project.springboot.service.NinjaService;
+import dev.project.springboot.ninjas.model.NinjaModel;
+import dev.project.springboot.ninjas.service.NinjaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class NinjaController {

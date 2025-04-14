@@ -1,6 +1,6 @@
-package dev.project.springboot.repository;
+package dev.project.springboot.ninjas.repository;
 
-import dev.project.springboot.model.NinjaModel;
+import dev.project.springboot.ninjas.model.NinjaModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

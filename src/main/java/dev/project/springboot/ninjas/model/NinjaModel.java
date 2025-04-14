@@ -1,14 +1,19 @@
-package dev.project.springboot.model;
+package dev.project.springboot.ninjas.model;
 
+import dev.project.springboot.missions.model.MissionModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
+import java.util.List;
+
 @Entity // Transforma uma classe em uma entidade do Banco de Dados
 @Table(name = "tb_ninjas")
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class NinjaModel {
 
@@ -24,5 +29,8 @@ public class NinjaModel {
 
     @Column(nullable = false)
     private int age;
+
+
 }
+
 

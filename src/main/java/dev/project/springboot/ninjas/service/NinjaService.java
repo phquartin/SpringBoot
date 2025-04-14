@@ -1,7 +1,7 @@
-package dev.project.springboot.service;
+package dev.project.springboot.ninjas.service;
 
-import dev.project.springboot.model.NinjaModel;
-import dev.project.springboot.repository.NinjaRepository;
+import dev.project.springboot.ninjas.model.NinjaModel;
+import dev.project.springboot.ninjas.repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
