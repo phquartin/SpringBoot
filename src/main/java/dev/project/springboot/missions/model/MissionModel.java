@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "tb_missions")
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 public class MissionModel {
 
