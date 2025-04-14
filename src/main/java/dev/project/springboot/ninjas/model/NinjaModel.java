@@ -2,23 +2,21 @@ package dev.project.springboot.ninjas.model;
 
 import dev.project.springboot.missions.model.MissionModel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity // Transforma uma classe em uma entidade do Banco de Dados
 @Table(name = "tb_ninjas")
+
 @Data
-@Builder
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NinjaModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     @Column(nullable = false)
@@ -34,7 +32,6 @@ public class NinjaModel {
     @ManyToOne
     @JoinColumn(name = "mission_id") // Chave Estrangeira
     private MissionModel mission;
-
 }
 
 

@@ -2,10 +2,9 @@ package dev.project.springboot.missions.model;
 
 import dev.project.springboot.ninjas.model.NinjaModel;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -13,13 +12,13 @@ import java.util.List;
 @Table(name = "tb_missions")
 
 @Data
-@Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class MissionModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     private String name;
