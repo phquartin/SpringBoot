@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_missions")
 
@@ -23,5 +25,9 @@ public class MissionModel {
     private String name;
 
     private MissionRank Rank;
+
+    // @OneToMany - Uma missao tem varios Ninjas
+    @OneToMany(mappedBy = "mission")
+    private List<NinjaModel> ninjas;
 
 }

@@ -30,6 +30,10 @@ public class NinjaModel {
     @Column(nullable = false)
     private int age;
 
+    // @ManyToOne - Muitos ninjas tem uma missao.
+    @ManyToOne
+    @JoinColumn(name = "mission_id") // Chave Estrangeira
+    private MissionModel mission;
 
 }
 
