@@ -15,7 +15,6 @@ target/
 
 ### Enviroment Keys ###
 .env
-.env/.env
 
 ### IntelliJ IDEA ###
 .idea
