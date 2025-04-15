@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #8a00ff;
+    background-color: #006fff;
     margin: 0;
     padding: 0;
 }
@@ -35,7 +35,7 @@ input[type="text"], textarea {
 }
 
 input[type="text"]:focus, textarea:focus {
-    border-color: #8a00ff; /* Accent color when focused */
+    border-color: #f3f3f3; /* Accent color when focused */
     box-shadow: 0 0 8px rgba(138, 0, 255, 0.5); /* Add glow effect */
     outline: none; /* Remove default outline */
 }
