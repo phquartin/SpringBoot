@@ -1,5 +1,6 @@
 package dev.project.springboot.missions.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.project.springboot.ninjas.model.NinjaModel;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,7 @@ public class MissionModel {
 
     // @OneToMany - Uma missao tem varios Ninjas
     @OneToMany(mappedBy = "mission")
+    @JsonIgnore
     private List<NinjaModel> ninjas;
 
 }
