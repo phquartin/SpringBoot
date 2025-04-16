@@ -1,27 +1,37 @@
 package dev.project.springboot.missions.controller;
 
+import dev.project.springboot.missions.model.MissionModel;
+import dev.project.springboot.missions.service.MissionService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/mission")
 public class MissionController {
 
+    private final MissionService missionService;
+
+    private MissionController(MissionService missionService) {
+        this.missionService = missionService;
+    }
+
     // Adicionar Missao (CREATE)
     @PostMapping("/create")
-    public String createMission() {
-        return "Missao Criada com Sucesso!";
+    public void createMission(@RequestBody MissionModel mission) {
+        missionService.createMission(mission);
     }
 
     // Procurar Missao por ID (READ)
-    @GetMapping("/id")
-    public String showMissionWithId() {
-        return "Mission id!";
+    @GetMapping("/id/{id}")
+    public MissionModel findMissionById(@PathVariable Long id) {
+        return missionService.getMissionById(id);
     }
 
     // Mostrar todos as Missoes (READ)
     @GetMapping("/all")
-    public String showMissions() {
-        return "Missao Lista!";
+    public List<MissionModel> findAllMissions() {
+        return missionService.getAllMissions();
     }
 
     // Alterar dados da Missao (UPDATE)
@@ -31,9 +41,9 @@ public class MissionController {
     }
 
     // Deletar Missao (DELETE)
-    @DeleteMapping("/delete")
-    public String deleteMissionWithId() {
-        return "Missao Deletado!";
+    @DeleteMapping("/delete/{id}")
+    public void deleteMissionById(@PathVariable Long id) {
+        missionService.deleteMissionById(id);
     }
 
 }
