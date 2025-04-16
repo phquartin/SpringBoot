@@ -28,5 +28,8 @@ public class NinjaService {
     public List<NinjaModel> getAllNinjas() {
         return ninjaRepository.findAll();
     }
+    public NinjaModel getNinjaById(Long id) {
+        return ninjaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ninja not found"));
+    }
 
 }
