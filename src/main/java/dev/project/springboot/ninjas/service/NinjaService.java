@@ -31,6 +31,12 @@ public class NinjaService {
         return ninjaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ninja not found"));
     }
 
+    public void updateNinja(NinjaModel ninja, Long id) {
+        getNinjaById(id);
+        ninja.setId(id);
+        ninjaRepository.save(ninja);
+    }
+
     public void deleteNinjaById(Long id) {
         getNinjaById(id);
         ninjaRepository.deleteById(id);
