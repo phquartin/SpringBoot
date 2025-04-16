@@ -1,5 +1,7 @@
 package dev.project.springboot.ninjas.service;
 
+import dev.project.springboot.ninjas.dto.NinjaDTO;
+import dev.project.springboot.ninjas.mapper.NinjaMapper;
 import dev.project.springboot.ninjas.model.NinjaModel;
 import dev.project.springboot.ninjas.repository.NinjaRepository;
 import org.springframework.stereotype.Service;
@@ -10,17 +12,19 @@ import java.util.List;
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
-    private NinjaService(NinjaRepository ninjaRepository) {
+    private NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
 
-    public void createNinja(NinjaModel ninja) {
-        if(ninja.getAge() <= 0){
+    public void createNinja(NinjaDTO ninjaDTO) {
+        if(ninjaDTO.getAge() <= 0){
             throw new IllegalArgumentException("Age must be greater than zero");
         }
-
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
         ninjaRepository.save(ninja);
     }
 

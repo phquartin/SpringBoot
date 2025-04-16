@@ -1,5 +1,6 @@
 package dev.project.springboot.ninjas.controller;
 
+import dev.project.springboot.ninjas.dto.NinjaDTO;
 import dev.project.springboot.ninjas.model.NinjaModel;
 import dev.project.springboot.ninjas.service.NinjaService;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,8 @@ public class NinjaController {
 
     // Adicionar Ninja (CREATE)
     @PostMapping("/create")
-    public void createNinja(@RequestBody NinjaModel ninja) {
-        ninjaService.createNinja(ninja);
+    public void createNinja(@RequestBody NinjaDTO ninjaDTO) {
+        ninjaService.createNinja(ninjaDTO);
     }
 
     // Procurar Ninja por ID (READ)
