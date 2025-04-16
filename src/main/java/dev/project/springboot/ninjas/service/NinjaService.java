@@ -16,7 +16,7 @@ public class NinjaService {
     }
 
 
-    public void saveNinja(NinjaModel ninja) {
+    public void createNinja(NinjaModel ninja) {
 
         if(ninja.getAge() <= 0){
             throw new IllegalArgumentException("Age must be greater than zero");
