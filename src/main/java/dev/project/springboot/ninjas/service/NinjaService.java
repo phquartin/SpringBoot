@@ -6,7 +6,9 @@ import dev.project.springboot.ninjas.model.NinjaModel;
 import dev.project.springboot.ninjas.repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class NinjaService {
@@ -28,16 +30,21 @@ public class NinjaService {
         ninjaRepository.save(ninja);
     }
 
-    public List<NinjaModel> getAllNinjas() {
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> getAllNinjas() {
+        List<NinjaModel> allNinjas = ninjaRepository.findAll();
+        return allNinjas.stream()
+                .map(ninjaMapper::map) // Transformando Models em DTO, um por um
+                .toList();
     }
-    public NinjaModel getNinjaById(Long id) {
-        return ninjaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ninja not found"));
+    public NinjaDTO getNinjaById(Long id) {
+        NinjaModel ninja = ninjaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ninja not found"));
+        return ninjaMapper.map(ninja);
     }
 
-    public void updateNinja(NinjaModel ninja, Long id) {
+    public void updateNinja(NinjaDTO ninjaDTO, Long id) {
         getNinjaById(id);
-        ninja.setId(id);
+        ninjaDTO.setId(id);
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
         ninjaRepository.save(ninja);
     }
 
