@@ -17,7 +17,6 @@ public class NinjaService {
 
 
     public void createNinja(NinjaModel ninja) {
-
         if(ninja.getAge() <= 0){
             throw new IllegalArgumentException("Age must be greater than zero");
         }
@@ -30,6 +29,11 @@ public class NinjaService {
     }
     public NinjaModel getNinjaById(Long id) {
         return ninjaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ninja not found"));
+    }
+
+    public void deleteNinjaById(Long id) {
+        getNinjaById(id);
+        ninjaRepository.deleteById(id);
     }
 
 }
