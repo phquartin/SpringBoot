@@ -4,6 +4,8 @@ import dev.project.springboot.ninjas.model.NinjaModel;
 import dev.project.springboot.ninjas.repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class NinjaService {
 
@@ -21,6 +23,10 @@ public class NinjaService {
         }
 
         ninjaRepository.save(ninja);
+    }
+
+    public List<NinjaModel> getAllNinjas() {
+        return ninjaRepository.findAll();
     }
 
 }

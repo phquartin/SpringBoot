@@ -2,17 +2,17 @@ package dev.project.springboot.ninjas.controller;
 
 import dev.project.springboot.ninjas.model.NinjaModel;
 import dev.project.springboot.ninjas.service.NinjaService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ninja")
 public class NinjaController {
 
-    @Autowired
-    private NinjaService ninjaService;
+    private final NinjaService ninjaService;
+
+    private NinjaController(NinjaService ninjaService) { this.ninjaService = ninjaService; }
 
     // Adicionar Ninja (CREATE)
     @PostMapping("/create")
@@ -22,14 +22,14 @@ public class NinjaController {
 
     // Procurar Ninja por ID (READ)
     @GetMapping("/id")
-    public String showNinjasWithId() {
+    public String getNinjasWithId() {
         return "Ninja id!";
     }
 
     // Mostrar todos os Ninjas (READ)
     @GetMapping("/all")
-    public String showNinjas() {
-        return "Ninja Lista!";
+    public List<NinjaModel> getAllNinjas() {
+        return ninjaService.getAllNinjas();
     }
 
     // Alterar dados do Ninja (UPDATE)
