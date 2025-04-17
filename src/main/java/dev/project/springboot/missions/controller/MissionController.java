@@ -1,5 +1,6 @@
 package dev.project.springboot.missions.controller;
 
+import dev.project.springboot.missions.dto.MissionDTO;
 import dev.project.springboot.missions.model.MissionModel;
 import dev.project.springboot.missions.service.MissionService;
 import org.springframework.web.bind.annotation.*;
@@ -18,26 +19,26 @@ public class MissionController {
 
     // Adicionar Missao (CREATE)
     @PostMapping("/create")
-    public void createMission(@RequestBody MissionModel mission) {
+    public void createMission(@RequestBody MissionDTO mission) {
         missionService.createMission(mission);
     }
 
     // Procurar Missao por ID (READ)
     @GetMapping("/id/{id}")
-    public MissionModel findMissionById(@PathVariable Long id) {
+    public MissionDTO findMissionById(@PathVariable Long id) {
         return missionService.getMissionById(id);
     }
 
     // Mostrar todos as Missoes (READ)
     @GetMapping("/all")
-    public List<MissionModel> findAllMissions() {
+    public List<MissionDTO> findAllMissions() {
         return missionService.getAllMissions();
     }
 
     // Alterar dados da Missao (UPDATE)
     @PutMapping("/update")
-    public String updateMissionWithId() {
-        return "Missao Atualizada!";
+    public void updateMissionById(Long id, MissionDTO missionDTO) {
+        missionService.updateMissionById(id, missionDTO);
     }
 
     // Deletar Missao (DELETE)

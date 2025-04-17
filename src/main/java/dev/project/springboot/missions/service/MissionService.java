@@ -1,5 +1,7 @@
 package dev.project.springboot.missions.service;
 
+import dev.project.springboot.missions.dto.MissionDTO;
+import dev.project.springboot.missions.mapper.MissionMapper;
 import dev.project.springboot.missions.model.MissionModel;
 import dev.project.springboot.missions.repository.MissionRepository;
 import org.springframework.stereotype.Service;
@@ -10,23 +12,35 @@ import java.util.List;
 public class MissionService {
 
     private final MissionRepository missionRepository;
+    private final MissionMapper missionMapper;
 
-    private MissionService(MissionRepository missionRepository) {
+    private MissionService(MissionRepository missionRepository, MissionMapper missionMapper) {
         this.missionRepository = missionRepository;
+        this.missionMapper = missionMapper;
     }
 
-    public void createMission(MissionModel missionModel) {
-        missionRepository.save(missionModel);
+    public void createMission(MissionDTO missionDTO) {
+        MissionModel mission = missionMapper.map(missionDTO);
+        missionRepository.save(mission);
     }
 
-    public List<MissionModel> getAllMissions() {
-        return missionRepository.findAll();
+    public List<MissionDTO> getAllMissions() {
+        List<MissionModel> allMissions = missionRepository.findAll();
+        return allMissions.stream()
+                .map(missionMapper::map)
+                .toList();
     }
-    public MissionModel getMissionById(Long id) {
-        return missionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Mission Not Found"));
+    public MissionDTO getMissionById(Long id) {
+        MissionModel mission = missionRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Mission Not Found"));
+        return missionMapper.map(mission);
     }
 
-    // TODO: update
+    public void updateMissionById(Long id, MissionDTO missionDTO) {
+        getMissionById(id);
+        missionDTO.setId(id);
+        MissionModel mission = missionMapper.map(missionDTO);
+        missionRepository.save(mission);
+    }
 
     public void deleteMissionById(Long id) {
         getMissionById(id);
