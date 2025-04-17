@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
-    private NinjaMapper ninjaMapper;
+    private final NinjaMapper ninjaMapper;
 
     private NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
