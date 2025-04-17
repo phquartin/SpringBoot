@@ -1,5 +1,7 @@
 package dev.project.springboot.ninjas.service;
 
+import dev.project.springboot.ninjas.dto.NinjaDTO;
+import dev.project.springboot.ninjas.mapper.NinjaMapper;
 import dev.project.springboot.ninjas.model.NinjaModel;
 import dev.project.springboot.ninjas.repository.NinjaRepository;
 import org.springframework.stereotype.Service;
@@ -10,30 +12,37 @@ import java.util.List;
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
+    private final NinjaMapper ninjaMapper;
 
-    private NinjaService(NinjaRepository ninjaRepository) {
+    private NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
 
-    public void createNinja(NinjaModel ninja) {
-        if(ninja.getAge() <= 0){
+    public void createNinja(NinjaDTO ninjaDTO) {
+        if(ninjaDTO.getAge() <= 0){
             throw new IllegalArgumentException("Age must be greater than zero");
         }
-
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
         ninjaRepository.save(ninja);
     }
 
-    public List<NinjaModel> getAllNinjas() {
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> getAllNinjas() {
+        List<NinjaModel> allNinjas = ninjaRepository.findAll();
+        return allNinjas.stream()
+                .map(ninjaMapper::map) // Transformando Models em DTO, um por um
+                .toList();
     }
-    public NinjaModel getNinjaById(Long id) {
-        return ninjaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ninja not found"));
+    public NinjaDTO getNinjaById(Long id) {
+        NinjaModel ninja = ninjaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Ninja not found"));
+        return ninjaMapper.map(ninja);
     }
 
-    public void updateNinja(NinjaModel ninja, Long id) {
+    public void updateNinja(NinjaDTO ninjaDTO, Long id) {
         getNinjaById(id);
-        ninja.setId(id);
+        ninjaDTO.setId(id);
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
         ninjaRepository.save(ninja);
     }
 
