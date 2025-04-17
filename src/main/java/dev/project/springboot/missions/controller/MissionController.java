@@ -1,7 +1,6 @@
 package dev.project.springboot.missions.controller;
 
 import dev.project.springboot.missions.dto.MissionDTO;
-import dev.project.springboot.missions.model.MissionModel;
 import dev.project.springboot.missions.service.MissionService;
 import org.springframework.web.bind.annotation.*;
 
