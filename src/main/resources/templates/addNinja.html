@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Ninja</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      width: 400px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #009879;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #007a63;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Cadastrar Ninja</h1>
+
+<form th:action="@{/ninja/ui/save}" th:object="${ninja}" method="post">
+  <label for="name">Nome:</label>
+  <input type="text" id="name" th:field="*{name}" placeholder="Digite o nome do ninja" required>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" th:field="*{email}" placeholder="Digite o email" required>
+
+  <label for="age">Idade:</label>
+  <input type="number" id="age" th:field="*{age}" placeholder="Digite a idade" required>
+
+  <label for="skills">Skills:</label>
+  <input type="text" id="skills" th:field="*{skills}" placeholder="Ex: Ninjutsu, Taijutsu..." required>
+
+  <button type="submit">Cadastrar Ninja</button>
+</form>
+
+</body>
+</html>
