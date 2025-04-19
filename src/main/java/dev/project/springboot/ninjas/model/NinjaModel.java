@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "mission")
 public class NinjaModel {
 
     @Id
